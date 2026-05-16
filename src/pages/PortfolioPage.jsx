@@ -403,7 +403,7 @@ function PortfolioPage() {
     <main className="mx-auto flex w-full max-w-7xl flex-col gap-6 px-4 pb-16 pt-2 sm:px-6 lg:gap-8 lg:px-12">
       <section
         id="hero"
-        className="section-shell surface-soft animated-border relative isolate overflow-hidden rounded-lg px-4 pt-3 pb-10 sm:px-6 md:px-8 md:pt-6 md:pb-14 lg:px-12"
+        className="section-shell surface-soft animated-border relative isolate overflow-hidden rounded-lg px-4 pt-3 pb-10 sm:px-6 md:px-8 md:pt-5 md:pb-11 lg:px-10"
       >
         <div className="section-aurora" />
         <div className="glass-panel absolute inset-0 -z-20 rounded-lg" />
@@ -414,15 +414,16 @@ function PortfolioPage() {
           <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(255,255,255,0.3),transparent_40%,rgba(212,175,55,0.08))] dark:bg-[linear-gradient(135deg,rgba(255,255,255,0.03),transparent_38%,rgba(212,175,55,0.08))]" />
         </div>
 
-        <div className="grid items-center gap-10 md:gap-12 lg:grid-cols-2">
+        <div className="grid items-center gap-8 md:gap-10 lg:grid-cols-2">
           <Reveal
             as="div"
             amount={0.15}
+            eager
             className="relative z-10 order-2 text-center lg:order-1 lg:text-left"
           >
             <motion.h1
               variants={itemVariants}
-              className="mt-4 font-heading text-4xl font-bold leading-[1.02] sm:text-5xl md:text-6xl lg:text-7xl"
+              className="mt-3 font-heading text-4xl font-bold leading-[1.02] sm:text-5xl md:text-6xl lg:text-6xl xl:text-7xl"
             >
               <span className="text-vintage-dark dark:text-white">Shivam</span>{" "}
               <span className="text-metallic-gold">Pisal</span>
@@ -430,7 +431,7 @@ function PortfolioPage() {
 
             <motion.p
               variants={itemVariants}
-              className="mt-4 inline-flex items-center justify-center gap-2 rounded-full border border-metallic-gold/25 bg-white/60 px-4 py-2 text-xl font-semibold text-vintage-dark shadow-[0_14px_34px_rgba(30,20,12,0.08)] dark:bg-white/[0.05] dark:text-vintage-base sm:text-2xl md:text-3xl lg:justify-start"
+              className="mt-4 inline-flex items-center justify-center gap-2 rounded-full border border-metallic-gold/25 bg-white/60 px-4 py-2 text-xl font-semibold text-vintage-dark shadow-[0_14px_34px_rgba(30,20,12,0.08)] dark:bg-white/[0.05] dark:text-vintage-base sm:text-2xl md:text-2xl lg:justify-start xl:text-3xl"
             >
               <ShieldCheck size={22} className="text-metallic-gold" />
               Full Stack Developer
@@ -438,7 +439,7 @@ function PortfolioPage() {
 
             <motion.div
               variants={itemVariants}
-              className="mt-5 flex justify-center lg:justify-start"
+              className="mt-4 flex justify-center lg:justify-start"
             >
               <p className="rounded-md border border-metallic-gold/20 bg-white/55 px-4 py-2 text-sm font-semibold tracking-[0.16em] text-vintage-dark shadow-[0_8px_20px_rgba(30,20,12,0.06)] dark:bg-white/[0.04] dark:text-vintage-base sm:text-base">
                 Building scalable systems with clarity, performance, and
@@ -448,7 +449,7 @@ function PortfolioPage() {
 
             <motion.p
               variants={itemVariants}
-              className="mx-auto mt-6 max-w-2xl text-sm leading-7 text-vintage-dark/85 dark:text-vintage-base/74 sm:text-base md:mx-0 md:text-lg md:leading-8"
+              className="mx-auto mt-5 max-w-2xl text-sm leading-7 text-vintage-dark/85 dark:text-vintage-base/74 sm:text-base md:mx-0 md:text-base md:leading-7 xl:text-lg xl:leading-8"
             >
               I design and build scalable applications across backend systems,
               frontend interfaces, and AI-driven workflows with a focus on
@@ -457,14 +458,14 @@ function PortfolioPage() {
 
             <motion.div
               variants={itemVariants}
-              className="mt-6 flex justify-center lg:justify-start"
+              className="mt-5 flex justify-center lg:justify-start"
             >
               <div className="hero-divider" />
             </motion.div>
 
             <motion.div
               variants={itemVariants}
-              className="mt-6 flex flex-wrap justify-center gap-2 lg:justify-start"
+              className="mt-4 flex flex-wrap justify-center gap-2 lg:justify-start"
             >
               {heroTechItems.map((item) => {
                 const meta = heroPillMeta[item];
@@ -491,7 +492,7 @@ function PortfolioPage() {
 
             <motion.div
               variants={itemVariants}
-              className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:justify-center lg:justify-start"
+              className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:justify-center lg:justify-start"
             >
               <a
                 href="#projects"
@@ -512,7 +513,7 @@ function PortfolioPage() {
 
             <motion.div
               variants={itemVariants}
-              className="mt-8 grid gap-3 sm:grid-cols-3"
+              className="mt-6 grid gap-3 sm:grid-cols-3"
             >
               {[
                 { label: "Focus", value: "Scalable Systems" },
@@ -574,29 +575,30 @@ function PortfolioPage() {
           <Reveal
             as="div"
             amount={0.15}
+            eager
             className="relative z-10 order-1 lg:order-2"
           >
             <motion.div
               variants={itemVariants}
-              className="mx-auto flex max-w-md flex-col items-center gap-8 py-6 text-center"
+              className="relative mx-auto flex max-w-md flex-col items-center gap-8 py-6 text-center"
             >
-              <div className="absolute top-8 h-52 w-72 rotate-[-8deg] rounded-lg border border-metallic-gold/12 bg-white/20 soft-grid opacity-70 dark:bg-white/[0.03]" />
-              <div className="pointer-events-none absolute inset-x-0 top-4 block h-[24rem]">
+              <div className="absolute top-8 z-0 h-52 w-72 rotate-[-8deg] rounded-lg border border-metallic-gold/12 bg-white/20 soft-grid opacity-70 dark:bg-white/[0.03]" />
+              <div className="pointer-events-none absolute inset-x-0 top-2 z-0 block h-[19rem] sm:top-4 sm:h-[24rem]">
                 {heroTechItems.map((item, index) => {
                   const meta = heroPillMeta[item];
                   const FloatingIcon = meta?.icon ?? BadgeCheck;
                   const positions = [
-                    "left-2 top-10",
-                    "right-4 top-20",
-                    "left-0 bottom-24",
-                    "right-8 bottom-14",
-                    "left-1/2 top-0 -translate-x-1/2",
+                    "-left-1 top-10 sm:left-2 sm:top-10",
+                    "-right-1 top-16 sm:right-4 sm:top-20",
+                    "left-1 bottom-14 sm:left-0 sm:bottom-24",
+                    "right-2 bottom-10 sm:right-8 sm:bottom-14",
+                    "left-1/2 top-1 -translate-x-1/2",
                   ];
 
                   return (
                     <motion.span
                       key={item}
-                      className={`absolute ${positions[index]} inline-flex h-11 w-11 items-center justify-center rounded-lg border border-metallic-gold/18 bg-white/70 text-metallic-gold shadow-[0_12px_28px_rgba(30,20,12,0.1)] backdrop-blur-md dark:bg-white/[0.06]`}
+                      className={`absolute ${positions[index]} inline-flex h-9 w-9 items-center justify-center rounded-lg border border-metallic-gold/18 bg-white/75 text-metallic-gold shadow-[0_12px_28px_rgba(30,20,12,0.1)] backdrop-blur-md dark:bg-black/35 sm:h-11 sm:w-11 sm:bg-white/70 sm:dark:bg-white/[0.06]`}
                       animate={
                         reduceMotion
                           ? undefined
@@ -613,7 +615,7 @@ function PortfolioPage() {
                       whileHover={reduceMotion ? undefined : { y: -4, rotate: 2 }}
                     >
                       <FloatingIcon
-                        size={18}
+                        size={16}
                         className={meta?.iconClassName ?? "text-metallic-gold"}
                       />
                     </motion.span>
@@ -638,13 +640,13 @@ function PortfolioPage() {
                 }}
                 whileHover={reduceMotion ? undefined : { scale: 1.025, rotate: 1.2 }}
                 whileTap={reduceMotion ? undefined : { scale: 0.99 }}
-                className="relative"
+                className="relative z-10"
               >
                 <div className="animated-border rounded-full border border-metallic-gold/30 bg-[linear-gradient(180deg,rgba(255,255,255,0.8),rgba(243,229,171,0.3))] p-3 shadow-[0_20px_60px_rgba(212,175,55,0.18)] dark:bg-[linear-gradient(180deg,rgba(255,255,255,0.05),rgba(212,175,55,0.08))]">
                   <img
                     src={heroImage}
                     alt="Shivam Pisal"
-                    className="h-72 w-72 rounded-full object-cover object-top shadow-[0_16px_40px_rgba(0,0,0,0.18)] sm:h-80 sm:w-80 md:h-[22rem] md:w-[22rem]"
+                    className="h-72 w-72 rounded-full object-cover object-top shadow-[0_16px_40px_rgba(0,0,0,0.18)] sm:h-80 sm:w-80 md:h-80 md:w-80 xl:h-[22rem] xl:w-[22rem]"
                   />
                 </div>
               </motion.div>

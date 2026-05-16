@@ -22,7 +22,14 @@ export const itemVariants = {
   },
 };
 
-function Reveal({ as = "section", id, className = "", children, amount = 0.2 }) {
+function Reveal({
+  as = "section",
+  id,
+  className = "",
+  children,
+  amount = 0.2,
+  eager = false,
+}) {
   const Component = motion[as];
 
   return (
@@ -30,8 +37,9 @@ function Reveal({ as = "section", id, className = "", children, amount = 0.2 }) 
       id={id}
       variants={sectionVariants}
       initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, amount }}
+      animate={eager ? "visible" : undefined}
+      whileInView={eager ? undefined : "visible"}
+      viewport={eager ? undefined : { once: true, amount }}
       className={className}
     >
       {children}
