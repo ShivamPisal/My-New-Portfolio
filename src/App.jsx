@@ -1,9 +1,7 @@
-import { useEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import Navbar from "./components/Navbar";
-import CustomCursor from "./components/CustomCursor";
 import ScrollTopButton from "./components/ScrollTopButton";
-import ScrollProgress from "./components/ScrollProgress";
 import AmbientMotion from "./components/AmbientMotion";
 import PortfolioPage from "./pages/PortfolioPage";
 import { scrollToSectionById } from "./utils/anchorScroll";
@@ -19,21 +17,57 @@ function App() {
     localStorage.setItem("theme", darkMode ? "dark" : "light");
   }, [darkMode]);
 
-  useEffect(() => {
-    if (!window.location.hash) return;
+  useLayoutEffect(() => {
+    window.history.scrollRestoration = "manual";
+
+    const forceTop = () => {
+      window.scrollTo(0, 0);
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
+    };
+
+    if (!window.location.hash || window.location.hash === "#hero") {
+      forceTop();
+      const rafId = window.requestAnimationFrame(forceTop);
+      const timeoutId = window.setTimeout(forceTop, 120);
+
+      return () => {
+        window.cancelAnimationFrame(rafId);
+        window.clearTimeout(timeoutId);
+        window.history.scrollRestoration = "auto";
+      };
+    }
 
     const hashId = window.location.hash.slice(1);
-    window.history.scrollRestoration = "manual";
-    const syncHashScroll = () => scrollToSectionById(hashId, "auto");
+    const syncHashScroll = () => {
+      if (hashId === "hero") {
+        forceTop();
+        return;
+      }
+      scrollToSectionById(hashId, "auto");
+    };
 
     const rafId = window.requestAnimationFrame(() => {
       window.requestAnimationFrame(syncHashScroll);
     });
+    const timeoutId = window.setTimeout(syncHashScroll, 160);
 
     return () => {
       window.cancelAnimationFrame(rafId);
+      window.clearTimeout(timeoutId);
       window.history.scrollRestoration = "auto";
     };
+  }, []);
+
+  useEffect(() => {
+    const handlePageShow = (event) => {
+      if (event.persisted && (!window.location.hash || window.location.hash === "#hero")) {
+      window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+      }
+    };
+
+    window.addEventListener("pageshow", handlePageShow);
+    return () => window.removeEventListener("pageshow", handlePageShow);
   }, []);
 
   return (
@@ -45,9 +79,7 @@ function App() {
     >
       <div className="pointer-events-none fixed inset-0 z-10 opacity-[0.035] dark:opacity-[0.055] soft-grid" />
       <AmbientMotion />
-      <ScrollProgress />
       
-      <CustomCursor />
       <Navbar
         darkMode={darkMode}
         onToggleTheme={() => setDarkMode((prev) => !prev)}

@@ -216,7 +216,7 @@ export const projects = [
   },
   {
     title: "Smart Serve Cafeteria",
-    category: "Web",
+    category: "Full Stack",
     projectType: "Personal",
     problem: "Long queues and inefficient manual ordering systems during peak cafeteria hours.",
     solution: "Developed a full-stack web application with user authentication, a digital product catalog, and an automated order cart with online payment processing to streamline the cafeteria experience.",

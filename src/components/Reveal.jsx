@@ -1,11 +1,10 @@
 import { motion } from "framer-motion";
 
 export const sectionVariants = {
-  hidden: { opacity: 0, y: 36, filter: "blur(8px)" },
+  hidden: { opacity: 0, y: 36 },
   visible: {
     opacity: 1,
     y: 0,
-    filter: "blur(0px)",
     transition: {
       duration: 0.78,
       ease: [0.22, 1, 0.36, 1],
@@ -15,11 +14,10 @@ export const sectionVariants = {
 };
 
 export const itemVariants = {
-  hidden: { opacity: 0, y: 20, filter: "blur(5px)" },
+  hidden: { opacity: 0, y: 20 },
   visible: {
     opacity: 1,
     y: 0,
-    filter: "blur(0px)",
     transition: { duration: 0.58, ease: [0.22, 1, 0.36, 1] },
   },
 };

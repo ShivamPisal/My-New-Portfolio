@@ -62,7 +62,7 @@ import {
   workExperience,
 } from "../data/portfolioData";
 
-const projectFilters = ["All", "Web", "Backend", "Cloud"];
+const projectFilters = ["All", ...Array.from(new Set(projects.map((project) => project.category)))];
 const smoothEase = [0.22, 1, 0.36, 1];
 const heroTechItems = ["Java", "Spring Boot", "React", "AWS", "AI Tools"];
 const journeyTabs = [
@@ -291,6 +291,7 @@ const skillAccentMeta = {
 const projectFilterMeta = {
   All: { icon: Layers2, iconClassName: "text-metallic-gold" },
   Web: { icon: MonitorSmartphone, iconClassName: "text-sky-600" },
+  "Full Stack": { icon: Layers3, iconClassName: "text-emerald-600" },
   Backend: { icon: ServerCog, iconClassName: "text-emerald-600" },
   Cloud: { icon: Cloud, iconClassName: "text-violet-600" },
 };
@@ -389,18 +390,20 @@ function PortfolioPage() {
   const filteredProjects =
     projectFilter === "All"
       ? projects
-      : projects.filter((project) => project.category === projectFilter);
+      : projects.filter(
+          (project) =>
+            project.category.toLowerCase() === projectFilter.toLowerCase(),
+        );
   const activeJourney =
     journeyTab === "education" ? educationTimeline : experienceTimeline;
-  const visibleProjects =
-    filteredProjects.length > 0 ? filteredProjects : projects;
+  const visibleProjects = filteredProjects;
   const featuredProject = projects.find((project) => project.featured);
 
   return (
     <main className="mx-auto flex w-full max-w-7xl flex-col gap-6 px-4 pb-16 pt-2 sm:px-6 lg:gap-8 lg:px-12">
       <section
         id="hero"
-        className="section-shell surface-soft animated-border relative isolate overflow-hidden rounded-lg px-4 pt-6 pb-10 sm:px-6 md:px-8 md:pt-10 md:pb-14 lg:px-12"
+        className="section-shell surface-soft animated-border relative isolate overflow-hidden rounded-lg px-4 pt-3 pb-10 sm:px-6 md:px-8 md:pt-6 md:pb-14 lg:px-12"
       >
         <div className="section-aurora" />
         <div className="glass-panel absolute inset-0 -z-20 rounded-lg" />
@@ -529,6 +532,43 @@ function PortfolioPage() {
                 </div>
               ))}
             </motion.div>
+
+            <motion.div
+              variants={itemVariants}
+              className="premium-card glass-panel mt-8 w-full rounded-lg p-4 text-left sm:p-5 lg:hidden"
+            >
+              <div className="flex flex-wrap items-center justify-between gap-3">
+                <div>
+                  <p className="text-xs uppercase tracking-[0.28em] text-vintage-dark/68 dark:text-vintage-base/45">
+                    Profile Snapshot
+                  </p>
+                  <h3 className="mt-2 font-heading text-xl font-semibold text-vintage-dark dark:text-vintage-base sm:text-2xl">
+                    Full Stack Developer
+                  </h3>
+                </div>
+                <span className="rounded-md border border-metallic-gold/20 bg-metallic-gold/12 px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-metallic-gold">
+                  Available
+                </span>
+              </div>
+              <div className="mt-4 grid gap-3 text-sm text-vintage-dark/86 dark:text-vintage-base/72">
+                <div className="flex items-center gap-3">
+                  <BadgeCheck size={16} className="text-metallic-gold" />
+                  Backend engineering with Java and Spring Boot
+                </div>
+                <div className="flex items-center gap-3">
+                  <Layers3 size={16} className="text-metallic-gold" />
+                  Clean frontend delivery with React and motion
+                </div>
+                <div className="flex items-center gap-3">
+                  <Cloud size={16} className="text-metallic-gold" />
+                  Cloud-native development with AWS and AI integration
+                </div>
+                <div className="flex items-center gap-3">
+                  <MapPin size={16} className="text-metallic-gold" />
+                  Maharashtra, India
+                </div>
+              </div>
+            </motion.div>
           </Reveal>
 
           <Reveal
@@ -541,7 +581,7 @@ function PortfolioPage() {
               className="mx-auto flex max-w-md flex-col items-center gap-8 py-6 text-center"
             >
               <div className="absolute top-8 h-52 w-72 rotate-[-8deg] rounded-lg border border-metallic-gold/12 bg-white/20 soft-grid opacity-70 dark:bg-white/[0.03]" />
-              <div className="pointer-events-none absolute inset-x-0 top-4 hidden h-[24rem] sm:block">
+              <div className="pointer-events-none absolute inset-x-0 top-4 block h-[24rem]">
                 {heroTechItems.map((item, index) => {
                   const meta = heroPillMeta[item];
                   const FloatingIcon = meta?.icon ?? BadgeCheck;
@@ -609,7 +649,7 @@ function PortfolioPage() {
                 </div>
               </motion.div>
 
-              <div className="premium-card glass-panel mt-12 w-full rounded-lg p-4 text-left sm:p-5">
+              <div className="premium-card glass-panel mt-12 hidden w-full rounded-lg p-4 text-left sm:p-5 lg:block">
                 <div className="flex flex-wrap items-center justify-between gap-3">
                   <div>
                     <p className="text-xs uppercase tracking-[0.28em] text-vintage-dark/68 dark:text-vintage-base/45">
@@ -1084,19 +1124,13 @@ function PortfolioPage() {
           })}
         </div>
 
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={projectFilter}
-            initial={{ opacity: 0, y: 18, filter: "blur(6px)" }}
-            animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-            exit={{ opacity: 0, y: -14, filter: "blur(6px)" }}
-            transition={{ duration: 0.36, ease: smoothEase, staggerChildren: 0.08 }}
-            className="grid gap-8 lg:grid-cols-2"
-          >
+        <div className="grid gap-8 lg:grid-cols-2">
           {visibleProjects.map((project) => (
             <motion.article
               key={project.title}
-              variants={itemVariants}
+              initial={{ opacity: 0, y: 18 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.32, ease: smoothEase }}
               whileHover={reduceMotion ? undefined : { y: -8 }}
               className="group premium-card animated-border glass-panel flex h-full flex-col overflow-hidden rounded-lg border border-metallic-gold/20 shadow-[0_14px_34px_rgba(30,20,12,0.08)] transition-transform duration-300 lg:min-h-[44rem]"
             >
@@ -1290,8 +1324,7 @@ function PortfolioPage() {
               })()}
             </motion.article>
           ))}
-          </motion.div>
-        </AnimatePresence>
+        </div>
       </Reveal>
 
       <Reveal

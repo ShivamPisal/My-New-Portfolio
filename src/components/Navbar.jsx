@@ -32,12 +32,18 @@ function Navbar({ darkMode, onToggleTheme }) {
 
   const handleNavClick = (event, id) => {
     event.preventDefault();
-    if (activeSection === id) {
+    window.history.pushState(null, "", id === "hero" ? window.location.pathname : `#${id}`);
+
+    if (id === "hero") {
+      window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
+      setActiveSection("hero");
       setMenuOpen(false);
       return;
     }
-    window.history.pushState(null, "", `#${id}`);
-    scrollToSectionById(id, "auto");
+
+    scrollToSectionById(id, "smooth");
     setMenuOpen(false);
   };
 
