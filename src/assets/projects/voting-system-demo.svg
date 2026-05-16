@@ -1,0 +1,30 @@
+<svg width="1200" height="720" viewBox="0 0 1200 720" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="720" rx="32" fill="#151311"/>
+  <rect x="36" y="36" width="1128" height="648" rx="26" fill="url(#bg)"/>
+  <rect x="86" y="84" width="1028" height="110" rx="24" fill="#FFF8EE" fill-opacity="0.07"/>
+  <rect x="86" y="226" width="462" height="370" rx="26" fill="#FFF8EE" fill-opacity="0.07"/>
+  <rect x="582" y="226" width="532" height="370" rx="26" fill="#FFF8EE" fill-opacity="0.07"/>
+  <circle cx="144" cy="140" r="18" fill="#D4AF37"/>
+  <rect x="182" y="126" width="180" height="22" rx="11" fill="#F3E5AB" fill-opacity="0.9"/>
+  <rect x="128" y="258" width="378" height="72" rx="18" fill="#D4AF37" fill-opacity="0.12" stroke="#D4AF37" stroke-opacity="0.24"/>
+  <rect x="128" y="356" width="378" height="72" rx="18" fill="#FFF8EE" fill-opacity="0.06"/>
+  <rect x="128" y="454" width="378" height="72" rx="18" fill="#FFF8EE" fill-opacity="0.06"/>
+  <rect x="620" y="262" width="420" height="18" rx="9" fill="#FFF8EE" fill-opacity="0.2"/>
+  <rect x="620" y="302" width="360" height="18" rx="9" fill="#FFF8EE" fill-opacity="0.12"/>
+  <path d="M648 504V410" stroke="#F3E5AB" stroke-width="16" stroke-linecap="round"/>
+  <path d="M768 504V366" stroke="#D4AF37" stroke-width="16" stroke-linecap="round"/>
+  <path d="M888 504V430" stroke="#B87333" stroke-width="16" stroke-linecap="round"/>
+  <path d="M1008 504V392" stroke="#FFF8EE" stroke-opacity="0.7" stroke-width="16" stroke-linecap="round"/>
+  <circle cx="648" cy="410" r="12" fill="#F3E5AB"/>
+  <circle cx="768" cy="366" r="12" fill="#D4AF37"/>
+  <circle cx="888" cy="430" r="12" fill="#B87333"/>
+  <circle cx="1008" cy="392" r="12" fill="#FFF8EE"/>
+  <text x="128" y="570" fill="#F3E5AB" font-size="34" font-family="Arial, sans-serif" font-weight="700">Secure Voting Flow</text>
+  <text x="618" y="148" fill="#F3E5AB" font-size="34" font-family="Arial, sans-serif" font-weight="700">Simple Voting System</text>
+  <defs>
+    <linearGradient id="bg" x1="80" y1="60" x2="1124" y2="660" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#241D18"/>
+      <stop offset="1" stop-color="#120F0D"/>
+    </linearGradient>
+  </defs>
+</svg>

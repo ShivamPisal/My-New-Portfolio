@@ -1,0 +1,31 @@
+<svg width="1200" height="720" viewBox="0 0 1200 720" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="720" rx="32" fill="#121111"/>
+  <rect x="36" y="36" width="1128" height="648" rx="26" fill="url(#bg)"/>
+  <rect x="88" y="84" width="1024" height="90" rx="22" fill="#FFF8EE" fill-opacity="0.08"/>
+  <rect x="88" y="214" width="300" height="408" rx="28" fill="#FFF8EE" fill-opacity="0.08"/>
+  <rect x="424" y="214" width="688" height="180" rx="28" fill="#FFF8EE" fill-opacity="0.08"/>
+  <rect x="424" y="430" width="688" height="192" rx="28" fill="#FFF8EE" fill-opacity="0.08"/>
+  <circle cx="146" cy="128" r="18" fill="#D4AF37"/>
+  <rect x="182" y="116" width="216" height="22" rx="11" fill="#F3E5AB" fill-opacity="0.9"/>
+  <circle cx="238" cy="316" r="84" fill="#D4AF37" fill-opacity="0.14" stroke="#D4AF37" stroke-width="18" stroke-opacity="0.45"/>
+  <rect x="142" y="442" width="188" height="18" rx="9" fill="#FFF8EE" fill-opacity="0.18"/>
+  <rect x="142" y="478" width="164" height="18" rx="9" fill="#FFF8EE" fill-opacity="0.12"/>
+  <path d="M470 340C536 292 608 274 682 314C752 352 818 340 884 300C944 264 1000 262 1062 290" stroke="#D4AF37" stroke-width="12" stroke-linecap="round"/>
+  <circle cx="470" cy="340" r="10" fill="#F3E5AB"/>
+  <circle cx="682" cy="314" r="10" fill="#F3E5AB"/>
+  <circle cx="884" cy="300" r="10" fill="#F3E5AB"/>
+  <circle cx="1062" cy="290" r="10" fill="#F3E5AB"/>
+  <rect x="468" y="468" width="122" height="88" rx="18" fill="#D4AF37" fill-opacity="0.16"/>
+  <rect x="620" y="468" width="122" height="88" rx="18" fill="#B87333" fill-opacity="0.16"/>
+  <rect x="772" y="468" width="122" height="88" rx="18" fill="#F3E5AB" fill-opacity="0.1"/>
+  <rect x="924" y="468" width="122" height="88" rx="18" fill="#FFF8EE" fill-opacity="0.08"/>
+  <text x="138" y="560" fill="#F3E5AB" font-size="34" font-family="Arial, sans-serif" font-weight="700">Profile Summary</text>
+  <text x="468" y="146" fill="#F3E5AB" font-size="34" font-family="Arial, sans-serif" font-weight="700">LeetCode Stats Viewer</text>
+  <text x="468" y="180" fill="#FFF8EE" fill-opacity="0.72" font-size="22" font-family="Arial, sans-serif">Progress snapshots, API-driven analytics, responsive layout</text>
+  <defs>
+    <linearGradient id="bg" x1="84" y1="60" x2="1128" y2="660" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#211B17"/>
+      <stop offset="1" stop-color="#12100F"/>
+    </linearGradient>
+  </defs>
+</svg>
