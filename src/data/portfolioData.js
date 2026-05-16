@@ -244,6 +244,6 @@ export const projects = [
     demoImage: reactPortfolioDemo,
     demoImageAlt: "React Portfolio Website preview",
     github: "https://github.com/ShivamPisal",
-    demo: "#",
+    demo: "https://my-new-portfolio-livid-sigma.vercel.app/",
   },
 ];

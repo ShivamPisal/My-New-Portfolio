@@ -698,7 +698,7 @@ function PortfolioPage() {
         <SectionTitle
           eyebrow="Experience"
           title="Professional experience will be added here"
-          subtitle="This section is ready for future internships, roles, or freelance work and already matches the same timeline-based structure used across the portfolio."
+          subtitle="Hands-on full stack experience contributing to REST API integration, UI improvements, AWS service usage, bug fixing, deployment support, and ongoing product enhancements."
         />
 
         <TimelineSection
