@@ -398,7 +398,7 @@ function PortfolioPage() {
     return () => mediaQuery.removeEventListener("change", updateStableHero);
   }, []);
 
-  const shouldStabilizeHeroMotion = reduceMotion || stableMobileHero;
+  const shouldDisableHeroBlur = stableMobileHero;
 
   const filteredProjects =
     projectFilter === "All"
@@ -611,9 +611,9 @@ function PortfolioPage() {
                   return (
                     <motion.span
                       key={item}
-                      className={`hero-floating-badge absolute ${positions[index]} inline-flex h-9 w-9 items-center justify-center rounded-lg border border-metallic-gold/18 bg-white/75 text-metallic-gold shadow-[0_12px_28px_rgba(30,20,12,0.1)] dark:bg-black/35 sm:h-11 sm:w-11 sm:bg-white/70 sm:dark:bg-white/[0.06] ${shouldStabilizeHeroMotion ? "" : "backdrop-blur-md"}`}
+                      className={`hero-floating-badge absolute ${positions[index]} inline-flex h-9 w-9 items-center justify-center rounded-lg border border-metallic-gold/18 bg-white/75 text-metallic-gold shadow-[0_12px_28px_rgba(30,20,12,0.1)] dark:bg-black/35 sm:h-11 sm:w-11 sm:bg-white/70 sm:dark:bg-white/[0.06] ${shouldDisableHeroBlur ? "" : "backdrop-blur-md"}`}
                       animate={
-                        shouldStabilizeHeroMotion
+                        reduceMotion
                           ? undefined
                           : {
                               y: [0, index % 2 === 0 ? -8 : 8, 0],
@@ -625,7 +625,7 @@ function PortfolioPage() {
                         repeat: Infinity,
                         ease: "easeInOut",
                       }}
-                      whileHover={shouldStabilizeHeroMotion ? undefined : { y: -4, rotate: 2 }}
+                      whileHover={reduceMotion ? undefined : { y: -4, rotate: 2 }}
                     >
                       <FloatingIcon
                         size={16}
@@ -638,7 +638,7 @@ function PortfolioPage() {
               <motion.div
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={
-                  shouldStabilizeHeroMotion
+                  reduceMotion
                     ? { opacity: 1, scale: 1, y: 0 }
                     : {
                         opacity: 1,
@@ -647,7 +647,7 @@ function PortfolioPage() {
                       }
                 }
                 transition={
-                  shouldStabilizeHeroMotion
+                  reduceMotion
                     ? {
                         opacity: { duration: 0.55, delay: 0.12 },
                         scale: { duration: 0.55, delay: 0.12 },
