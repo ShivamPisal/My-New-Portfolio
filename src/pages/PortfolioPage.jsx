@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import {
   ArrowRight,
@@ -372,9 +372,9 @@ function FloatingField({ as = "input", label, className = "", ...props }) {
       <Component
         {...props}
         placeholder=" "
-        className="peer w-full rounded-lg border border-metallic-gold/18 bg-white/55 px-5 pb-4 pt-7 text-sm text-vintage-dark outline-none transition focus:border-metallic-gold focus:bg-white/80 focus:ring-4 focus:ring-metallic-gold/10 dark:bg-white/[0.04] dark:text-vintage-base dark:focus:bg-white/[0.06]"
+        className="peer w-full rounded-md border border-metallic-gold/18 bg-white/55 px-4 pb-2.5 pt-5 text-sm text-vintage-dark outline-none transition focus:border-metallic-gold focus:bg-white/80 focus:ring-4 focus:ring-metallic-gold/10 dark:bg-white/[0.04] dark:text-vintage-base dark:focus:bg-white/[0.06]"
       />
-      <span className="pointer-events-none absolute left-5 top-4 text-sm text-vintage-dark/48 transition-all duration-200 peer-placeholder-shown:top-5 peer-placeholder-shown:text-base peer-focus:top-3 peer-focus:text-xs peer-focus:uppercase peer-focus:tracking-[0.2em] peer-focus:text-metallic-gold dark:text-vintage-base/45 dark:peer-focus:text-metallic-champagne">
+      <span className="pointer-events-none absolute left-4 top-2.5 text-sm text-vintage-dark/48 transition-all duration-200 peer-placeholder-shown:top-3.5 peer-placeholder-shown:text-base peer-focus:top-1.5 peer-focus:text-xs peer-focus:uppercase peer-focus:tracking-[0.2em] peer-focus:text-metallic-gold dark:text-vintage-base/45 dark:peer-focus:text-metallic-champagne">
         {label}
       </span>
     </label>
@@ -386,6 +386,19 @@ function PortfolioPage() {
   const [projectFilter, setProjectFilter] = useState("All");
   const [journeyTab, setJourneyTab] = useState("experience");
   const reduceMotion = useReducedMotion();
+  const [stableMobileHero, setStableMobileHero] = useState(false);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(max-width: 767px), (pointer: coarse)");
+    const updateStableHero = () => setStableMobileHero(mediaQuery.matches);
+
+    updateStableHero();
+    mediaQuery.addEventListener("change", updateStableHero);
+
+    return () => mediaQuery.removeEventListener("change", updateStableHero);
+  }, []);
+
+  const shouldStabilizeHeroMotion = reduceMotion || stableMobileHero;
 
   const filteredProjects =
     projectFilter === "All"
@@ -403,7 +416,7 @@ function PortfolioPage() {
     <main className="mx-auto flex w-full max-w-7xl flex-col gap-6 px-4 pb-16 pt-2 sm:px-6 lg:gap-8 lg:px-12">
       <section
         id="hero"
-        className="section-shell surface-soft animated-border relative isolate overflow-hidden rounded-lg px-4 pt-3 pb-10 sm:px-6 md:px-8 md:pt-5 md:pb-11 lg:px-10"
+        className="hero-section section-shell surface-soft animated-border relative isolate overflow-hidden rounded-lg px-4 pt-3 pb-10 sm:px-6 md:px-8 md:pt-5 md:pb-11 lg:px-10"
       >
         <div className="section-aurora" />
         <div className="glass-panel absolute inset-0 -z-20 rounded-lg" />
@@ -449,7 +462,7 @@ function PortfolioPage() {
 
             <motion.p
               variants={itemVariants}
-              className="mx-auto mt-5 max-w-2xl text-sm leading-7 text-vintage-dark/85 dark:text-vintage-base/74 sm:text-base md:mx-0 md:text-base md:leading-7 xl:text-lg xl:leading-8"
+              className="mx-auto mt-5 max-w-2xl text-center text-sm leading-7 text-vintage-dark/85 dark:text-vintage-base/74 sm:text-base md:text-base md:leading-7 lg:mx-0 lg:text-left xl:text-lg xl:leading-8"
             >
               I design and build scalable applications across backend systems,
               frontend interfaces, and AI-driven workflows with a focus on
@@ -598,9 +611,9 @@ function PortfolioPage() {
                   return (
                     <motion.span
                       key={item}
-                      className={`absolute ${positions[index]} inline-flex h-9 w-9 items-center justify-center rounded-lg border border-metallic-gold/18 bg-white/75 text-metallic-gold shadow-[0_12px_28px_rgba(30,20,12,0.1)] backdrop-blur-md dark:bg-black/35 sm:h-11 sm:w-11 sm:bg-white/70 sm:dark:bg-white/[0.06]`}
+                      className={`hero-floating-badge absolute ${positions[index]} inline-flex h-9 w-9 items-center justify-center rounded-lg border border-metallic-gold/18 bg-white/75 text-metallic-gold shadow-[0_12px_28px_rgba(30,20,12,0.1)] dark:bg-black/35 sm:h-11 sm:w-11 sm:bg-white/70 sm:dark:bg-white/[0.06] ${shouldStabilizeHeroMotion ? "" : "backdrop-blur-md"}`}
                       animate={
-                        reduceMotion
+                        shouldStabilizeHeroMotion
                           ? undefined
                           : {
                               y: [0, index % 2 === 0 ? -8 : 8, 0],
@@ -612,7 +625,7 @@ function PortfolioPage() {
                         repeat: Infinity,
                         ease: "easeInOut",
                       }}
-                      whileHover={reduceMotion ? undefined : { y: -4, rotate: 2 }}
+                      whileHover={shouldStabilizeHeroMotion ? undefined : { y: -4, rotate: 2 }}
                     >
                       <FloatingIcon
                         size={16}
@@ -624,23 +637,32 @@ function PortfolioPage() {
               </div>
               <motion.div
                 initial={{ opacity: 0, scale: 0.9 }}
-                animate={{
-                  opacity: 1,
-                  scale: 1,
-                  y: reduceMotion ? 0 : [0, -10, 0],
-                }}
-                transition={{
-                  opacity: { duration: 0.55, delay: 0.12 },
-                  scale: { duration: 0.55, delay: 0.12 },
-                  y: {
-                    duration: 4,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                  },
-                }}
-                whileHover={reduceMotion ? undefined : { scale: 1.025, rotate: 1.2 }}
-                whileTap={reduceMotion ? undefined : { scale: 0.99 }}
-                className="relative z-10"
+                animate={
+                  shouldStabilizeHeroMotion
+                    ? { opacity: 1, scale: 1, y: 0 }
+                    : {
+                        opacity: 1,
+                        scale: 1,
+                        y: [0, -10, 0],
+                      }
+                }
+                transition={
+                  shouldStabilizeHeroMotion
+                    ? {
+                        opacity: { duration: 0.55, delay: 0.12 },
+                        scale: { duration: 0.55, delay: 0.12 },
+                      }
+                    : {
+                        opacity: { duration: 0.55, delay: 0.12 },
+                        scale: { duration: 0.55, delay: 0.12 },
+                        y: {
+                          duration: 4,
+                          repeat: Infinity,
+                          ease: "easeInOut",
+                        },
+                      }
+                }
+                className="hero-photo-frame relative z-10"
               >
                 <div className="animated-border rounded-full border border-metallic-gold/30 bg-[linear-gradient(180deg,rgba(255,255,255,0.8),rgba(243,229,171,0.3))] p-3 shadow-[0_20px_60px_rgba(212,175,55,0.18)] dark:bg-[linear-gradient(180deg,rgba(255,255,255,0.05),rgba(212,175,55,0.08))]">
                   <img
@@ -1390,7 +1412,7 @@ function PortfolioPage() {
       <Reveal
         id="contact"
         amount={0.03}
-        className="section-shell surface-muted animated-border relative overflow-hidden rounded-lg px-4 py-10 sm:px-6 md:py-16 lg:px-10"
+        className="section-shell surface-muted animated-border relative overflow-hidden rounded-lg px-4 py-6 sm:px-6 md:py-7 lg:px-8 lg:py-9"
       >
         <div className="section-aurora" />
         <div className="glass-panel absolute inset-0 -z-10 rounded-lg" />
@@ -1398,25 +1420,26 @@ function PortfolioPage() {
           eyebrow="Contact"
           title="Let's build something impactful together"
           subtitle="Whether you are hiring, collaborating, or exploring an idea, I'm open to conversations around thoughtful digital products and engineering work."
+          className="mb-6 md:mb-7"
         />
 
-        <div className="grid gap-6 lg:grid-cols-[1.05fr_0.95fr]">
+        <div className="grid gap-3.5 lg:grid-cols-[1.05fr_0.95fr]">
           <motion.form
             variants={itemVariants}
             action="https://formspree.io/f/xykbbnll"
             method="POST"
-            className="premium-card animated-border glass-panel rounded-lg p-5 md:p-8"
+            className="premium-card animated-border glass-panel rounded-lg p-4 md:p-5"
           >
-            <div className="mb-6">
+            <div className="mb-3.5">
               <p className="text-[0.68rem] uppercase tracking-[0.24em] text-metallic-gold">
                 Send a message
               </p>
-              <h3 className="mt-3 font-heading text-3xl font-semibold text-vintage-dark dark:text-vintage-base">
+              <h3 className="mt-2 font-heading text-3xl font-semibold text-vintage-dark dark:text-vintage-base">
                 Start the conversation
               </h3>
             </div>
 
-            <div className="space-y-4">
+            <div className="space-y-2">
               <FloatingField
                 type="text"
                 name="name"
@@ -1433,14 +1456,14 @@ function PortfolioPage() {
                 as="textarea"
                 name="message"
                 label="Project details"
-                rows="6"
+                rows="3"
                 required
               />
             </div>
 
             <button
               type="submit"
-              className="interactive-ring animated-border mt-6 inline-flex w-full items-center justify-center gap-2 rounded-md bg-vintage-dark px-6 py-4 text-sm font-semibold uppercase tracking-[0.18em] text-vintage-base transition hover:-translate-y-1 hover:shadow-[0_18px_40px_rgba(26,24,23,0.24)] dark:bg-vintage-base dark:text-vintage-dark"
+              className="interactive-ring animated-border mt-3.5 inline-flex w-full items-center justify-center gap-2 rounded-md bg-vintage-dark px-5 py-3 text-sm font-semibold uppercase tracking-[0.18em] text-vintage-base transition hover:-translate-y-1 hover:shadow-[0_18px_40px_rgba(26,24,23,0.24)] dark:bg-vintage-base dark:text-vintage-dark"
             >
               <Send size={18} />
               Send Message
@@ -1448,15 +1471,15 @@ function PortfolioPage() {
 
           </motion.form>
 
-          <motion.div variants={itemVariants} className="grid gap-5">
-            <div className="premium-card glass-panel rounded-lg p-5 md:p-8">
+          <motion.div variants={itemVariants} className="grid gap-3">
+            <div className="premium-card glass-panel rounded-lg p-4 md:p-5">
               <p className="text-[0.68rem] uppercase tracking-[0.24em] text-metallic-gold">
                 Direct contact
               </p>
-              <h3 className="mt-3 font-heading text-3xl font-semibold text-vintage-dark dark:text-vintage-base">
+              <h3 className="mt-2 font-heading text-3xl font-semibold text-vintage-dark dark:text-vintage-base">
                 Prefer a direct route?
               </h3>
-              <p className="mt-4 text-sm leading-7 text-vintage-dark/72 dark:text-vintage-base/72 md:text-base">
+              <p className="mt-3 text-sm leading-7 text-vintage-dark/72 dark:text-vintage-base/72 md:text-base">
                 Reach out by email or connect through GitHub and LinkedIn. I'm
                 especially interested in full-time roles, freelance builds, and
                 developer-focused products.
@@ -1474,13 +1497,13 @@ function PortfolioPage() {
                 href={item.href}
                 target={item.href.startsWith("http") ? "_blank" : undefined}
                 rel={item.href.startsWith("http") ? "noreferrer" : undefined}
-                className="interactive-ring premium-card glass-panel flex items-center justify-between rounded-lg p-4 transition hover:-translate-y-1 md:p-5"
+                className="interactive-ring premium-card glass-panel flex items-center justify-between rounded-lg p-3.5 transition hover:-translate-y-1"
               >
-                <div className="flex items-center gap-4">
+                <div className="flex items-center gap-3">
                   <div
-                    className={`flex h-12 w-12 items-center justify-center rounded-lg border ${item.badgeClassName}`}
+                    className={`flex h-10 w-10 items-center justify-center rounded-lg border ${item.badgeClassName}`}
                   >
-                    <item.icon size={20} className={item.iconClassName} />
+                    <item.icon size={18} className={item.iconClassName} />
                   </div>
                   <div>
                     <p className="text-[0.68rem] uppercase tracking-[0.24em] text-vintage-dark/42 dark:text-vintage-base/42">
@@ -1495,14 +1518,14 @@ function PortfolioPage() {
               </motion.a>
             ))}
 
-            <div className="premium-card glass-panel rounded-lg p-5 md:p-8">
+            <div className="premium-card glass-panel rounded-lg p-4 md:p-5">
               <div className="flex items-center gap-3 text-metallic-gold">
                 <BriefcaseBusiness size={18} />
                 <span className="text-[0.68rem] font-semibold uppercase tracking-[0.24em]">
                   Open to opportunities
                 </span>
               </div>
-              <p className="mt-4 text-sm leading-7 text-vintage-dark/72 dark:text-vintage-base/72 md:text-base">
+              <p className="mt-3 text-sm leading-7 text-vintage-dark/72 dark:text-vintage-base/72 md:text-base">
                 I'm currently sharpening my backend and cloud depth while
                 creating polished frontend experiences. If your team values
                 thoughtful execution, I'd be glad to talk.

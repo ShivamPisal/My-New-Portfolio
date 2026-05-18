@@ -1,19 +1,26 @@
 import { motion } from "framer-motion";
 import { itemVariants } from "./Reveal";
 
-function SectionTitle({ eyebrow, title, subtitle }) {
+function SectionTitle({
+  eyebrow,
+  title,
+  subtitle,
+  className = "",
+  titleClassName = "",
+  subtitleClassName = "",
+}) {
   return (
     <motion.div
       variants={itemVariants}
-      className="mb-12 text-center md:mb-16"
+      className={`mb-12 text-center md:mb-16 ${className}`}
     >
       <p className="mb-3 text-[0.72rem] font-bold uppercase tracking-[0.42em] text-metallic-copper dark:text-metallic-champagne">
         {eyebrow}
       </p>
-      <h2 className="font-heading text-4xl font-bold text-vintage-dark dark:text-vintage-base md:text-6xl">
+      <h2 className={`font-heading text-4xl font-bold text-vintage-dark dark:text-vintage-base md:text-6xl ${titleClassName}`}>
         {title}
       </h2>
-      <p className="mx-auto mt-5 max-w-2xl text-base leading-8 text-vintage-dark/80 dark:text-vintage-base/72 md:text-lg">
+      <p className={`mx-auto mt-5 max-w-2xl text-base leading-8 text-vintage-dark/80 dark:text-vintage-base/72 md:text-lg ${subtitleClassName}`}>
         {subtitle}
       </p>
       <motion.div

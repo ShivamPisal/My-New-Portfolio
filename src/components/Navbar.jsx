@@ -115,25 +115,25 @@ function Navbar({ darkMode, onToggleTheme }) {
       initial={{ y: -60, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.6 }}
-      className="sticky top-0 z-50 px-4 pt-3 sm:px-6 lg:px-12"
+      className="sticky top-0 z-50"
     >
-      <nav className="animated-border glass-panel mx-auto flex w-full max-w-7xl items-center justify-between gap-4 rounded-lg px-4 py-3 md:px-6">
+      <nav className="navbar-panel glass-panel flex w-full items-center justify-between gap-4 px-4 py-3 md:px-6">
         <a
           href="#hero"
           onClick={(event) => handleNavClick(event, "hero")}
-          className="group flex items-center gap-3 rounded-md focus-ring"
+          className="navbar-brand group flex items-center gap-3 rounded-md focus-ring"
         >
           <img
             src="/favicon.png"
             alt="SP Logo"
             className="h-10 w-10 object-contain transition-transform duration-300 group-hover:rotate-3 group-hover:scale-110"
           />
-          <span className="hidden font-heading text-lg font-semibold tracking-[0.08em] text-vintage-dark dark:text-vintage-base sm:block">
+          <span className="navbar-brand-name hidden font-heading text-lg font-semibold tracking-[0.08em] text-vintage-dark dark:text-vintage-base sm:block">
             Shivam <span className="text-metallic-gold">Pisal</span>
           </span>
         </a>
 
-        <div className="hidden items-center gap-2 md:flex">
+        <div className="navbar-links hidden items-center gap-2 md:flex">
           {navLinks.map((link) => {
             const NavIcon = navIconMap[link.id] ?? Home;
 
@@ -142,7 +142,7 @@ function Navbar({ darkMode, onToggleTheme }) {
               key={link.id}
               href={`#${link.id}`}
               onClick={(event) => handleNavClick(event, link.id)}
-              className={`group relative rounded-md px-3 py-2 text-sm font-medium transition focus-ring ${
+              className={`navbar-link group relative rounded-md px-3 py-2 text-sm font-medium transition focus-ring ${
                 activeSection === link.id
                   ? "font-semibold text-vintage-dark dark:text-vintage-base"
                   : "text-vintage-dark/70 hover:text-vintage-dark dark:text-vintage-base/65 dark:hover:text-vintage-base"
@@ -155,8 +155,8 @@ function Navbar({ darkMode, onToggleTheme }) {
                   transition={{ type: "spring", stiffness: 360, damping: 32 }}
                 />
               )}
-              <span className="relative z-10 inline-flex items-center gap-2">
-                <NavIcon size={15} strokeWidth={1.8} className={activeSection === link.id ? "text-metallic-gold" : "text-current/65"} />
+              <span className="navbar-link-content relative z-10 inline-flex items-center gap-2">
+                <NavIcon size={15} strokeWidth={1.8} className={`navbar-link-icon ${activeSection === link.id ? "text-metallic-gold" : "text-current/65"}`} />
                 {link.label}
               </span>
               <span className="absolute left-4 right-4 bottom-1 h-px origin-left scale-x-0 bg-gradient-to-r from-metallic-gold via-metallic-champagne to-metallic-gold transition-transform duration-300 group-hover:scale-x-100" />
@@ -201,9 +201,9 @@ function Navbar({ darkMode, onToggleTheme }) {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -18 }}
             transition={{ duration: 0.28, ease: "easeOut" }}
-            className="mx-auto mt-3 max-w-7xl md:hidden"
+            className="md:hidden"
           >
-            <div className="glass-panel overflow-hidden rounded-lg px-3 py-3">
+            <div className="glass-panel overflow-hidden px-3 py-3">
               {navLinks.map((link) => (
                 <a
                   key={link.id}
